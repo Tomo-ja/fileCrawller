@@ -15,14 +15,14 @@ let path = fileManager.currentDirectoryPath
 // for development
 //let path = "/Users/tomo/Desktop/ciccc/MOBILE/MiniProject-FileTree/MiniProject-FileTree"
 
+// print parent directry of code called
 let index = path.lastIndex(of: "/")!
 let searchTargetDirectroy = path[path.index(after: index)...]
-
 print(searchTargetDirectroy)
 
 func makeFileTree(in dir: String, prefix: String) {
 	do {
-		let files = try FileManager.default.contentsOfDirectory(atPath: dir)
+		let files = try fileManager.contentsOfDirectory(atPath: dir)
 		
 		for (index, file) in files.enumerated() {
 			

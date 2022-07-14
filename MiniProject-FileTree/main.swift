@@ -7,14 +7,6 @@
 
 import Foundation
 
-print("Hello, World!")
-
-struct PrefixSign {
-	static let rightDown = "├─"
-	static let right = "└─"
-	static let down = "│"
-}
-
 let fileManager = FileManager.default
 // for production
 //let path = fileManager.currentDirectoryPath
@@ -25,7 +17,6 @@ let path = "/Users/tomo/Desktop/ciccc/MOBILE/MiniProject-FileTree/MiniProject-Fi
 let index = path.lastIndex(of: "/")!
 let searchTargetDirectroy = path[path.index(after: index)...]
 
-print(path)
 print(searchTargetDirectroy)
 
 func makeFileTree(in dir: String, prefix: String) {
@@ -33,22 +24,20 @@ func makeFileTree(in dir: String, prefix: String) {
 		let files = try FileManager.default.contentsOfDirectory(atPath: dir)
 		
 		for (index, file) in files.enumerated() {
-			if index == files.count - 1 {
-				if let _ = file.firstIndex(of: "."){
-					print("\(prefix) └─ \(file)")
-				} else {
-					makeFileTree(in: dir + "/\(file)", prefix: " \(PrefixSign.down)   " + prefix)
-					print("\(prefix) └─ \(file)")
-				}
+			
+			let isEndOfLevel = index == files.count - 1
+			let sign = isEndOfLevel ? " └─ " : " ├─ "
+			let padding = isEndOfLevel ? "     " : " │   "
+			
+			if let _ = file.firstIndex(of: "."){
+				print(prefix + sign + file)
 			} else {
-				print("\(prefix) ├─ \(file)")
+				print(prefix + sign + file)
+				makeFileTree(in: dir + "/\(file)", prefix: padding + prefix)
 			}
 		}
 	} catch {
-		print("Name of \(dir) is not exist")
 	}
 }
 
 makeFileTree(in: path, prefix: "")
-
-

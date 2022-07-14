@@ -20,6 +20,10 @@ let index = path.lastIndex(of: "/")!
 let searchTargetDirectroy = path[path.index(after: index)...]
 print(searchTargetDirectroy)
 
+// because of complied code will recoganize as directroy number is not 0
+var numberOfFile = 1
+var numberOfDir = -1
+
 func makeFileTree(in dir: String, prefix: String) {
 	do {
 		let files = try fileManager.contentsOfDirectory(atPath: dir)
@@ -31,8 +35,10 @@ func makeFileTree(in dir: String, prefix: String) {
 			let padding = isEndOfLevel ? "     " : " │   "
 			
 			if let _ = file.firstIndex(of: "."){
+				numberOfFile += 1
 				print(prefix + sign + file)
 			} else {
+				numberOfDir += 1
 				print(prefix + sign + file)
 				makeFileTree(in: dir + "/\(file)", prefix: prefix + padding)
 			}
@@ -42,3 +48,4 @@ func makeFileTree(in dir: String, prefix: String) {
 }
 
 makeFileTree(in: path, prefix: "")
+print("\(numberOfDir) directories, \(numberOfFile) files")

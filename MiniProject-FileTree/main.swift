@@ -33,7 +33,7 @@ func makeFileTree(in dir: String, prefix: String) {
 				print(prefix + sign + file)
 			} else {
 				print(prefix + sign + file)
-				makeFileTree(in: dir + "/\(file)", prefix: padding + prefix)
+				makeFileTree(in: dir + "/\(file)", prefix: prefix + padding)
 			}
 		}
 	} catch {

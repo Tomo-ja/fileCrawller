@@ -8,11 +8,12 @@
 import Foundation
 
 let fileManager = FileManager.default
+
 // for production
-//let path = fileManager.currentDirectoryPath
+let path = fileManager.currentDirectoryPath
 
 // for development
-let path = "/Users/tomo/Desktop/ciccc/MOBILE/MiniProject-FileTree/MiniProject-FileTree"
+//let path = "/Users/tomo/Desktop/ciccc/MOBILE/MiniProject-FileTree/MiniProject-FileTree"
 
 let index = path.lastIndex(of: "/")!
 let searchTargetDirectroy = path[path.index(after: index)...]
